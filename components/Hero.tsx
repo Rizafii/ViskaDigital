@@ -1,10 +1,9 @@
 "use client";
+import GridMotion from "@/components/GridMotion";
 import { Binoculars, SendHorizonal } from "lucide-react";
 import Link from "next/link";
-import GridMotion from "@/components/GridMotion";
 
 export default function Hero() {
-  
   const items = [
     "https://i.pinimg.com/736x/8a/f0/c5/8af0c5f573a9d22d4e3e655847bf6160.jpg",
     "https://i.pinimg.com/736x/33/db/ce/33dbce93c908c1caca4e70f7961c994c.jpg",
@@ -47,7 +46,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black opacity-50 pointer-events-none z-10" />
 
       {/* Content */}
-      <div className="w-full relative flex flex-col space-y-4 text-center mx-auto px-4 sm:px-12 lg:px-26 container items-center justify-center pt-42 pb-38">
+      <div className="w-full relative flex flex-col space-y-4 text-center mx-auto px-4 sm:px-12 lg:px-26 container items-center justify-center pt-42 pb-46">
         <h1 className="font-bold text-5xl leading-14 text-white z-10">
           Buat Twibbon <span className="font-fancy">&</span> Shortlink
           <br />
