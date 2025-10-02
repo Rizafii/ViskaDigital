@@ -4,31 +4,36 @@ import Link from "next/link";
 import GridMotion from "@/components/GridMotion";
 
 export default function Hero() {
+  
   const items = [
-    "Item 1",
-    <div key="jsx-item-1">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 2",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "Item 4",
-    <div key="jsx-item-3">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 5",
-    <div key="jsx-item-4">Custom JSX Content</div>,
-    "Item 7",
-    <div key="jsx-item-5">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 8",
-    <div key="jsx-item-6">Custom JSX Content</div>,
-    "Item 10",
-    <div key="jsx-item-7">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 11",
-    <div key="jsx-item-8">Custom JSX Content</div>,
-    "Item 13",
-    <div key="jsx-item-9">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 14",
+    "https://i.pinimg.com/736x/8a/f0/c5/8af0c5f573a9d22d4e3e655847bf6160.jpg",
+    "https://i.pinimg.com/736x/33/db/ce/33dbce93c908c1caca4e70f7961c994c.jpg",
+    "https://i.pinimg.com/736x/78/48/4d/78484d84e224c969518f9c0cd07349ac.jpg",
+    "https://i.pinimg.com/736x/91/6e/28/916e28128145f2feba3ace91ac8885a6.jpg",
+    "https://i.pinimg.com/736x/eb/ea/d9/ebead91da23289521dc6d27e26ea2e25.jpg",
+    "https://i.pinimg.com/736x/b2/87/3b/b2873ba2868e69c5836901cd826c6155.jpg",
+    "https://i.pinimg.com/736x/53/1b/22/531b22ab2cffaf03c7faecef2fdddfb7.jpg",
+    "https://i.pinimg.com/736x/ca/ec/94/caec94b6dd13f3c1269453cc12749462.jpg",
+    "https://i.pinimg.com/736x/e9/64/3f/e9643ff42b8b0953c7d17443704c719c.jpg",
+    "https://i.pinimg.com/736x/8a/f0/c5/8af0c5f573a9d22d4e3e655847bf6160.jpg",
+    "https://i.pinimg.com/736x/33/db/ce/33dbce93c908c1caca4e70f7961c994c.jpg",
+    "https://i.pinimg.com/736x/78/48/4d/78484d84e224c969518f9c0cd07349ac.jpg",
+    "https://i.pinimg.com/736x/91/6e/28/916e28128145f2feba3ace91ac8885a6.jpg",
+    "https://i.pinimg.com/736x/eb/ea/d9/ebead91da23289521dc6d27e26ea2e25.jpg",
+    "https://i.pinimg.com/736x/b2/87/3b/b2873ba2868e69c5836901cd826c6155.jpg",
+    "https://i.pinimg.com/736x/53/1b/22/531b22ab2cffaf03c7faecef2fdddfb7.jpg",
+    "https://i.pinimg.com/736x/ca/ec/94/caec94b6dd13f3c1269453cc12749462.jpg",
+    "https://i.pinimg.com/736x/e9/64/3f/e9643ff42b8b0953c7d17443704c719c.jpg",
+    "https://i.pinimg.com/736x/8a/f0/c5/8af0c5f573a9d22d4e3e655847bf6160.jpg",
+    "https://i.pinimg.com/736x/33/db/ce/33dbce93c908c1caca4e70f7961c994c.jpg",
+    "https://i.pinimg.com/736x/78/48/4d/78484d84e224c969518f9c0cd07349ac.jpg",
+    "https://i.pinimg.com/736x/91/6e/28/916e28128145f2feba3ace91ac8885a6.jpg",
+    "https://i.pinimg.com/736x/eb/ea/d9/ebead91da23289521dc6d27e26ea2e25.jpg",
+    "https://i.pinimg.com/736x/b2/87/3b/b2873ba2868e69c5836901cd826c6155.jpg",
+    "https://i.pinimg.com/736x/53/1b/22/531b22ab2cffaf03c7faecef2fdddfb7.jpg",
+    "https://i.pinimg.com/736x/ca/ec/94/caec94b6dd13f3c1269453cc12749462.jpg",
+    "https://i.pinimg.com/736x/e9/64/3f/e9643ff42b8b0953c7d17443704c719c.jpg",
+    "https://i.pinimg.com/736x/e9/64/3f/e9643ff42b8b0953c7d17443704c719c.jpg",
   ];
 
   return (
@@ -39,7 +44,7 @@ export default function Hero() {
       </div>
 
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black opacity-30 pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-black opacity-50 pointer-events-none z-10" />
 
       {/* Content */}
       <div className="w-full relative flex flex-col space-y-4 text-center mx-auto px-4 sm:px-12 lg:px-26 container items-center justify-center pt-42 pb-38">

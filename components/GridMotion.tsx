@@ -3,20 +3,23 @@ import { gsap } from 'gsap';
 import './GridMotion.css';
 
 interface GridMotionProps {
-  items?: string[];
+  items?: (string | React.ReactElement)[];
   gradientColor?: string;
 }
 
 const GridMotion: FC<GridMotionProps> = ({ items = [], gradientColor = 'black' }) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const mouseXRef = useRef<number>(window.innerWidth / 2);
+  const mouseXRef = useRef<number>(0);
 
   const totalItems = 28;
   const defaultItems = Array.from({ length: totalItems }, (_, index) => `Item ${index + 1}`);
   const combinedItems = items.length > 0 ? items.slice(0, totalItems) : defaultItems;
 
   useEffect(() => {
+    // Initialize mouseXRef with window width on client side
+    mouseXRef.current = window.innerWidth / 2;
+    
     gsap.ticker.lagSmoothing(0);
 
     const handleMouseMove = (e: MouseEvent): void => {
