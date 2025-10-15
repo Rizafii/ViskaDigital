@@ -46,7 +46,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black opacity-50 pointer-events-none z-10" />
 
       {/* Content */}
-      <div className="w-full relative flex flex-col space-y-4 text-center mx-auto px-4 sm:px-12 lg:px-26 container items-start lg:items-center justify-center pt-42 pb-46">
+      <div className="w-full relative flex flex-col space-y-4 text-center mx-auto px-6 sm:px-12 lg:px-26 container items-start lg:items-center justify-center pt-42 pb-46">
         <h1 className="font-bold text-start lg:text-center text-4xl lg:text-5xl leading-12 lg:leading-14 text-white z-10">
           Buat Twibbon <span className="font-fancy">&</span> Shortlink
           <br className="hidden lg:flex" />

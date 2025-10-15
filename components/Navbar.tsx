@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <nav className="w-full fixed top-0 left-0 z-50">
-      <div className="w-full py-6 mx-auto px-4 sm:px-12 lg:px-26 container flex  justify-between items-center ">
+      <div className="w-full py-6 mx-auto px-6 sm:px-12 lg:px-26 container flex bg-gradient-to-b from-black to-transparent justify-between items-center ">
         <div className="brand flex">
           <p className="font-bold text-xl lg:text-2xl text-white">
             ViskaDigital<span className="align-super text-xs">©</span>
