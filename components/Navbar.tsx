@@ -59,7 +59,7 @@ export default function Navbar() {
           </div>
 
           {/* Sidebar Content */}
-          <div className="flex flex-col gap-2 p-4">
+          <div className="flex flex-col gap-2 p-4 flex-1">
             <Link
               href={"#"}
               onClick={() => setIsSidebarOpen(false)}
@@ -76,6 +76,16 @@ export default function Navbar() {
               <UploadCloud className="size-5" />
               <span className="font-semibold text-sm">Upload Twibbon</span>
             </Link>
+
+            <div className="auth mt-auto">
+              <Link
+                href={"#"}
+                onClick={() => setIsSidebarOpen(false)}
+                className="block w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-primary hover:bg-hover-primary  bg-primary text-white transition-colors"
+              >
+                Masuk / Daftar
+              </Link>
+            </div>
           </div>
         </div>
       </div>

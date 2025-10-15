@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Trending from "@/components/Popular";
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Trending />
       <TopCreator />
+      <Footer />
     </>
   );
 }
