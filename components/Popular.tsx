@@ -49,25 +49,29 @@ export default function Popular() {
               href={"#"}
               className="px-4 hidden py-2 text-xs font-medium truncate rounded-full lg:flex items-center gap-2 hover:bg-primary hover:text-white duration-200 transition-all text-primary border border-primary"
             >
-              Lihat Semua{" "}
+              Lihat Semua
               <ArrowRightCircle className="size-4 fill-primary text-white" />
             </Link>
           </div>
         </div>
         <div className="twibbon-overview w-full">
-          <div className="flex snap-x snap-mandatory lg:grid lg:grid-cols-5 gap-6 mt-8 overflow-x-auto lg:overflow-x-visible flex-nowrap pb-4 scrollbar-hide">
+          <div className="flex snap-x snap-mandatory lg:grid lg:grid-cols-5 gap-6 mt-4 overflow-x-auto lg:overflow-x-visible flex-nowrap pb-4 scrollbar-hide">
             {twibbon.map((item, index) => (
               <Link
                 href={item.url}
                 key={index}
                 className="twibbon-item snap-always flex-shrink-0 lg:flex-shrink"
               >
-                <div className="sampul bg-white rounded-lg shadow-md flex items-center justify-center h-60 w-60">
+                <div className="sampul relative bg-white rounded-lg shadow-md group flex items-center justify-center h-60 w-60">
                   <img
                     src={item.url}
                     alt={item.title}
-                    className="w-auto h-full object-cover rounded-lg shadow-md scale-95 hover:scale-100 duration-200 transition-all ease-in-out"
+                    className="w-auto h-full object-cover rounded-lg shadow-md scale-95 group-hover:scale-100 duration-200 transition-all "
                   />
+                  <div className="absolute inset-0 group-hover:bg-black/20 rounded-lg scale-95 group-hover:scale-100 duration-200 transition-all " />
+                  <span className="absolute items-center justify-center flex opacity-0 group-hover:opacity-100 duration-200 transition-all  text-white bg-primary font-semibold text-sm rounded-full px-4 py-2 ">
+                    Lihat
+                  </span>
                 </div>
 
                 <div className="information flex flex-col mt-2 gap-1 w-64">

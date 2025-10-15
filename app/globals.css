@@ -5,7 +5,7 @@
   --background: #ffffff;
   --foreground: #271618;
   --border: #e5e7eb;
-  --primary: #557ae3;
+  --primary: #21b6ec;
 }
 
 @theme inline {
@@ -34,6 +34,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
