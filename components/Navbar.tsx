@@ -2,10 +2,12 @@
 import { Menu, Plus, UploadCloud, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Login from "./auth/Login";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +32,9 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Login Modal */}
+      {isLoginOpen && <Login onClose={() => setIsLoginOpen(false)} />}
+
       {/* Overlay */}
       {isSidebarOpen && (
         <div
@@ -78,13 +83,15 @@ export default function Navbar() {
             </Link>
 
             <div className="auth mt-auto">
-              <Link
-                href={"#"}
-                onClick={() => setIsSidebarOpen(false)}
+              <button
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                  setIsLoginOpen(true);
+                }}
                 className="block w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-primary hover:bg-hover-primary  bg-primary text-white transition-colors"
               >
                 Masuk / Daftar
-              </Link>
+              </button>
             </div>
           </div>
         </div>
