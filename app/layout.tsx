@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Delicious_Handrawn, Schoolbell } from "next/font/google";
 import "./globals.css";
+import LenisProvider from "@/components/LenisProvider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -11,7 +12,6 @@ const schoolbell = Schoolbell({
   subsets: ["latin"],
   weight: ["400"],
 });
-
 
 export const metadata: Metadata = {
   title: "Viska Digital",
@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${schoolbell.variable}  antialiased`}
       >
-        {children}
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );

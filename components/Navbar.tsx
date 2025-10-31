@@ -3,11 +3,16 @@ import { Menu, Plus, UploadCloud, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Login from "./auth/Login";
+import UploadTwibbon from "./modal/UploadTwibbon";
+import { Button } from "./ui/button";
+import CreateLink from "./modal/CreateLink";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isUploadTwibbonOpen, setIsUploadTwibbonOpen] = useState(false);
+  const [isCreateLinkOpen, setIsCreateLinkOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +39,12 @@ export default function Navbar() {
     <>
       {/* Login Modal */}
       {isLoginOpen && <Login onClose={() => setIsLoginOpen(false)} />}
+      {isUploadTwibbonOpen && (
+        <UploadTwibbon onClose={() => setIsUploadTwibbonOpen(false)} />
+      )}
+      {isCreateLinkOpen && (
+        <CreateLink onClose={() => setIsCreateLinkOpen(false)} />
+      )}
 
       {/* Overlay */}
       {isSidebarOpen && (
@@ -65,22 +76,26 @@ export default function Navbar() {
 
           {/* Sidebar Content */}
           <div className="flex flex-col gap-2 p-4 flex-1">
-            <Link
-              href={"#"}
-              onClick={() => setIsSidebarOpen(false)}
+            <button
+              onClick={() => {
+                setIsSidebarOpen(false);
+                setIsCreateLinkOpen(true);
+              }}
               className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <Plus className="size-5" />
               <span className="font-semibold text-sm">Buat Link</span>
-            </Link>
-            <Link
-              href={"#"}
-              onClick={() => setIsSidebarOpen(false)}
+            </button>
+            <button
+              onClick={() => {
+                setIsSidebarOpen(false);
+                setIsUploadTwibbonOpen(true);
+              }}
               className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <UploadCloud className="size-5" />
               <span className="font-semibold text-sm">Upload Twibbon</span>
-            </Link>
+            </button>
 
             <div className="auth mt-auto">
               <button
@@ -117,8 +132,10 @@ export default function Navbar() {
           </div>
           <div className="search"></div>
           <div className="cta flex items-center gap-3 ">
-            <Link
-              href={"#"}
+            <button
+              onClick={() => {
+                setIsCreateLinkOpen(true);
+              }}
               className={`lg:flex items-center gap-1 hidden duration-200 ease-in-out transition-all hover:text-primary font-semibold text-xs px-4 py-3 rounded-full truncate ${
                 isScrolled
                   ? "bg-gray-100 text-foreground"
@@ -126,9 +143,11 @@ export default function Navbar() {
               }`}
             >
               <Plus className="size-4 font-bold" /> Buat Link
-            </Link>
-            <Link
-              href={"#"}
+            </button>
+            <button
+              onClick={() => {
+                setIsUploadTwibbonOpen(true);
+              }}
               className={`lg:flex items-center gap-1 hidden duration-200 ease-in-out transition-all hover:text-primary font-semibold text-xs px-4 py-3 rounded-full truncate ${
                 isScrolled
                   ? "bg-gray-100 text-foreground"
@@ -136,7 +155,7 @@ export default function Navbar() {
               }`}
             >
               <UploadCloud className="size-4 font-bold" /> Upload Twibbon
-            </Link>
+            </button>
             {/* <Separator orientation="vertical" className="bg-white self-stretch"/> */}
             <button
               onClick={() => setIsSidebarOpen(true)}
