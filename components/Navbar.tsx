@@ -1,11 +1,13 @@
 "use client";
-import { Menu, Plus, UploadCloud, X } from "lucide-react";
+import { Menu, Plus, UploadCloud, X, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Login from "./auth/Login";
 import UploadTwibbon from "./modal/UploadTwibbon";
 import { Button } from "./ui/button";
 import CreateLink from "./modal/CreateLink";
+import { useUser } from "@/lib/auth/hooks";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,6 +15,13 @@ export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isUploadTwibbonOpen, setIsUploadTwibbonOpen] = useState(false);
   const [isCreateLinkOpen, setIsCreateLinkOpen] = useState(false);
+  const { user, loading } = useUser();
+  const supabase = createClient();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsSidebarOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,15 +107,45 @@ export default function Navbar() {
             </button>
 
             <div className="auth mt-auto">
-              <button
-                onClick={() => {
-                  setIsSidebarOpen(false);
-                  setIsLoginOpen(true);
-                }}
-                className="block w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-primary hover:bg-hover-primary  bg-primary text-white transition-colors"
-              >
-                Masuk / Daftar
-              </button>
+              {loading ? (
+                <div className="block w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-400">
+                  Loading...
+                </div>
+              ) : user ? (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="flex items-center justify-center size-10 rounded-full bg-primary text-white font-semibold">
+                      {user.email?.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-foreground truncate">
+                        {user.user_metadata?.full_name ||
+                          user.email?.split("@")[0]}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center justify-center gap-2 w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+                  >
+                    <LogOut className="size-4" />
+                    Keluar
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsSidebarOpen(false);
+                    setIsLoginOpen(true);
+                  }}
+                  className="block w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-primary hover:bg-hover-primary  bg-primary text-white transition-colors"
+                >
+                  Masuk / Daftar
+                </button>
+              )}
             </div>
           </div>
         </div>
