@@ -17,12 +17,17 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, Upload, CheckCircle, X } from "lucide-react";
 import Image from "next/image";
+import { uploadTwibbon } from "@/lib/supabase/twibbon";
 
 interface UploadTwibbonProps {
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
-export default function UploadTwibbon({ onClose }: UploadTwibbonProps) {
+export default function UploadTwibbon({
+  onClose,
+  onSuccess,
+}: UploadTwibbonProps) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>("");
   const [name, setName] = useState("");
@@ -30,6 +35,7 @@ export default function UploadTwibbon({ onClose }: UploadTwibbonProps) {
   const [customUrl, setCustomUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const DOMAIN_PREFIX = "twibbon.app/"; // define the fixed domain prefix
 
@@ -70,6 +76,7 @@ export default function UploadTwibbon({ onClose }: UploadTwibbonProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess(false);
 
     if (!file) {
       setError("Silakan upload file twibbon PNG.");
@@ -88,16 +95,30 @@ export default function UploadTwibbon({ onClose }: UploadTwibbonProps) {
 
     setLoading(true);
     try {
-      // Add your API call here to upload the twibbon
-      console.log("Uploading:", {
+      const result = await uploadTwibbon({
         file,
-        name,
-        description,
-        customUrl: `${DOMAIN_PREFIX}${customUrl}`,
+        name: name.trim(),
+        description: description.trim(),
+        customUrl: customUrl.trim(),
       });
-      // await uploadTwibbon(file, name, description, customUrl);
-      onClose();
+
+      if (result.success) {
+        setSuccess(true);
+        // Call onSuccess callback if provided
+        if (onSuccess) {
+          onSuccess();
+        }
+        // Close modal after short delay
+        setTimeout(() => {
+          onClose();
+        }, 1500);
+      } else {
+        setError(
+          result.error || "Gagal mengunggah twibbon. Silakan coba lagi."
+        );
+      }
     } catch (err) {
+      console.error("Upload error:", err);
       setError("Gagal mengunggah twibbon. Silakan coba lagi.");
     } finally {
       setLoading(false);
@@ -264,6 +285,13 @@ export default function UploadTwibbon({ onClose }: UploadTwibbonProps) {
               <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 <span>{error}</span>
+              </div>
+            )}
+
+            {success && (
+              <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+                <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                <span>Twibbon berhasil diunggah!</span>
               </div>
             )}
           </CardContent>
