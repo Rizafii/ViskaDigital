@@ -3,6 +3,7 @@ import { Menu, Plus, UploadCloud, X, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Login from "./auth/Login";
+import Register from "./auth/Register";
 import UploadTwibbon from "./modal/UploadTwibbon";
 import { Button } from "./ui/button";
 import CreateLink from "./modal/CreateLink";
@@ -13,6 +14,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isUploadTwibbonOpen, setIsUploadTwibbonOpen] = useState(false);
   const [isCreateLinkOpen, setIsCreateLinkOpen] = useState(false);
   const { user, loading } = useUser();
@@ -47,7 +49,24 @@ export default function Navbar() {
   return (
     <>
       {/* Login Modal */}
-      {isLoginOpen && <Login onClose={() => setIsLoginOpen(false)} />}
+      {isLoginOpen && (
+        <Login
+          onClose={() => setIsLoginOpen(false)}
+          onSwitchToRegister={() => {
+            setIsLoginOpen(false);
+            setIsRegisterOpen(true);
+          }}
+        />
+      )}
+      {isRegisterOpen && (
+        <Register
+          onClose={() => setIsRegisterOpen(false)}
+          onSwitchToLogin={() => {
+            setIsRegisterOpen(false);
+            setIsLoginOpen(true);
+          }}
+        />
+      )}
       {isUploadTwibbonOpen && (
         <UploadTwibbon onClose={() => setIsUploadTwibbonOpen(false)} />
       )}

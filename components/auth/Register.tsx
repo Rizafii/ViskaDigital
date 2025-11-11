@@ -23,6 +23,7 @@ interface RegisterProps {
 }
 
 export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -55,6 +56,10 @@ export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
           emailRedirectTo:
             process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
             window.location.origin,
+          data: {
+            display_name: displayName,
+            full_name: displayName,
+          },
         },
       });
 
@@ -62,6 +67,7 @@ export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
         setError(error.message);
       } else {
         setSuccess(true);
+        setDisplayName("");
         setEmail("");
         setPassword("");
         setConfirmPassword("");
@@ -105,7 +111,17 @@ export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
                   {error}
                 </div>
               )}
-              <Label>Email</Label>
+              <Label>Nama Lengkap</Label>
+              <Input
+                placeholder="Nama Lengkap"
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                className="bg-primary/5 border-black/20"
+                disabled={loading}
+                required
+              />
+              <Label className="mt-2">Email</Label>
               <Input
                 placeholder="Email"
                 type="email"
@@ -143,7 +159,7 @@ export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
                 {loading ? "Sedang Mendaftar..." : "Daftar"}
               </Button>
               <Separator className="w-full my-2" />
-              <div className="another w-full flex flex-col gap-6">
+              {/* <div className="another w-full flex flex-col gap-6">
                 <Button
                   type="button"
                   variant="outline"
@@ -172,7 +188,7 @@ export default function Register({ onClose, onSwitchToLogin }: RegisterProps) {
                   />
                   Daftar dengan Facebook
                 </Button>
-              </div>
+              </div> */}
               <CardFooter className="mt-4 items-center flex w-full justify-center p-0">
                 <span className="text-sm text-foreground/70 flex items-center gap-1">
                   Sudah punya akun?

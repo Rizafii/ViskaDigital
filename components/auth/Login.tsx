@@ -108,7 +108,7 @@ export default function Login({ onClose, onSwitchToRegister }: LoginProps) {
               {loading ? "Sedang Masuk..." : "Masuk"}
             </Button>
             <Separator className="w-full my-2" />
-            <div className="another w-full flex flex-col gap-6">
+            {/* <div className="another w-full flex flex-col gap-6">
               <Button
                 type="button"
                 variant="outline"
@@ -137,20 +137,20 @@ export default function Login({ onClose, onSwitchToRegister }: LoginProps) {
                 />
                 Masuk dengan Facebook
               </Button>
-            </div>
-            <CardFooter className="mt-4 items-center flex w-full justify-center p-0">
-              <span className="text-sm text-foreground/70 flex items-center gap-1">
-                Belum punya akun?
-                <button
-                  type="button"
-                  onClick={onSwitchToRegister}
-                  className="text-primary font-semibold hover:underline"
-                >
-                  Daftar
-                </button>
-              </span>
-            </CardFooter>
+            </div> */}
           </form>
+          <CardFooter className="mt-4 items-center flex w-full justify-center p-0">
+            <span className="text-sm text-foreground/70 flex items-center gap-1">
+              Belum punya akun?
+              <button
+                type="button"
+                onClick={onSwitchToRegister}
+                className="text-primary font-semibold hover:underline"
+              >
+                Daftar
+              </button>
+            </span>
+          </CardFooter>
         </CardContent>
       </Card>
     </div>
