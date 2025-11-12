@@ -1,14 +1,13 @@
 "use client";
-import { Menu, Plus, UploadCloud, X, User, LogOut } from "lucide-react";
-import Link from "next/link";
+import { Menu, Plus, UploadCloud, X, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import UploadTwibbon from "./modal/UploadTwibbon";
-import { Button } from "./ui/button";
 import CreateLink from "./modal/CreateLink";
 import { useUser } from "@/lib/auth/hooks";
 import { createClient } from "@/lib/supabase/client";
+import SidebarAccountInfo from "./SidebarAccountInfo";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -91,9 +90,9 @@ export default function Navbar() {
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div className="flex justify-between items-center p-6">
-            <p className="font-bold text-xl text-foreground">
+            <a className="font-bold text-xl text-foreground" href="/">
               ViskaDigital<span className="align-super text-xs">©</span>
-            </p>
+            </a>
             <button
               onClick={() => setIsSidebarOpen(false)}
               className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -104,6 +103,12 @@ export default function Navbar() {
 
           {/* Sidebar Content */}
           <div className="flex flex-col gap-2 p-4 flex-1">
+            {user && !loading && (
+              <div className="mb-4">
+                <SidebarAccountInfo />
+              </div>
+            )}
+
             <button
               onClick={() => {
                 setIsSidebarOpen(false);
@@ -131,29 +136,13 @@ export default function Navbar() {
                   Loading...
                 </div>
               ) : user ? (
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 border border-gray-200">
-                    <div className="flex items-center justify-center size-10 rounded-full bg-primary text-white font-semibold">
-                      {user.email?.charAt(0).toUpperCase()}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-foreground truncate">
-                        {user.user_metadata?.full_name ||
-                          user.email?.split("@")[0]}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {user.email}
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center justify-center gap-2 w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
-                  >
-                    <LogOut className="size-4" />
-                    Keluar
-                  </button>
-                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center justify-center gap-2 w-full text-center text-sm font-semibold px-4 py-3 rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+                >
+                  <LogOut className="size-4" />
+                  Keluar
+                </button>
               ) : (
                 <button
                   onClick={() => {
@@ -180,13 +169,14 @@ export default function Navbar() {
           }`}
         >
           <div className="brand flex">
-            <p
+            <a
+              href="/"
               className={`font-bold text-xl lg:text-2xl transition-colors duration-300 ${
                 isScrolled ? "text-foreground" : "text-white"
               }`}
             >
               ViskaDigital<span className="align-super text-xs">©</span>
-            </p>
+            </a>
           </div>
           <div className="search"></div>
           <div className="cta flex items-center gap-3 ">

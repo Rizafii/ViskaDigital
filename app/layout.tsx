@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Delicious_Handrawn, Schoolbell } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${manrope.variable} ${schoolbell.variable}  antialiased`}
       >
         <LenisProvider>{children}</LenisProvider>
+        <Toaster />
       </body>
     </html>
   );
