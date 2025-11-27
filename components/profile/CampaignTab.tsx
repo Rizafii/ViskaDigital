@@ -51,7 +51,7 @@ export default function CampaignTab({
   };
 
   const handleCopyLink = (url: string) => {
-    const fullUrl = `twibbon.app/${url}`;
+    const fullUrl = `${window.location.origin}/twibbon/${url}`;
     navigator.clipboard.writeText(fullUrl);
     alert(`Link copied: ${fullUrl}`);
   };

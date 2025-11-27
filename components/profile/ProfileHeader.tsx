@@ -63,6 +63,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
                 <AvatarImage
                   src={profilePhotoUrl || "/placeholder.svg"}
                   alt={userName}
+                  className="w-full h-full object-cover"
                 />
                 <AvatarFallback className="bg-gray-200 text-gray-400 text-4xl">
                   {userName.charAt(0).toUpperCase()}

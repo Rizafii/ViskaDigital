@@ -251,3 +251,73 @@ export async function getUserTwibbons() {
     };
   }
 }
+
+/**
+ * Get twibbon by custom URL with creator information
+ */
+export async function getTwibbonByUrl(customUrl: string) {
+  try {
+    const supabase = createClient();
+
+    const { data: twibbon, error } = await supabase
+      .from("twibone")
+      .select(`
+        *,
+        users:users_uid (
+          uid,
+          name,
+          email,
+          created_at,
+          creator_data (
+            bio,
+            photo_profile_path
+          )
+        )
+      `)
+      .eq("url", customUrl)
+      .single();
+
+    if (error) {
+      console.error("Fetch error:", error);
+      return {
+        success: false,
+        error: "Twibbon tidak ditemukan",
+      };
+    }
+
+    if (!twibbon) {
+      return {
+        success: false,
+        error: "Twibbon tidak ditemukan",
+      };
+    }
+
+    // Add public URL
+    const twibbonWithUrl = {
+      ...twibbon,
+      publicUrl: supabase.storage
+        .from("twibbons")
+        .getPublicUrl(twibbon.path).data.publicUrl,
+    };
+
+    // Get supporter count (from twibone_used)
+    const { count: supporterCount } = await supabase
+      .from("twibone_used")
+      .select("*", { count: "exact", head: true })
+      .eq("twibone_uid", twibbon.uid);
+
+    return {
+      success: true,
+      data: {
+        ...twibbonWithUrl,
+        supporterCount: supporterCount || 0,
+      },
+    };
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return {
+      success: false,
+      error: "Terjadi kesalahan tidak terduga",
+    };
+  }
+}
