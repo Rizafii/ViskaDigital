@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Users, Copy, MoreVertical, Maximize2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import TwibbonEditor from "./TwibbonEditor";
 
 interface TwibbonDetailProps {
   twibbon: {
@@ -33,6 +34,7 @@ interface TwibbonDetailProps {
 
 export default function TwibbonDetail({ twibbon }: TwibbonDetailProps) {
   const [isImageExpanded, setIsImageExpanded] = useState(false);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const creatorData = twibbon.users.creator_data?.[0];
   const creatorPhotoUrl = creatorData?.photo_profile_path
@@ -49,8 +51,7 @@ export default function TwibbonDetail({ twibbon }: TwibbonDetailProps) {
   };
 
   const handleChoosePhoto = () => {
-    // Logic for choosing photo will be implemented later
-    toast.info("Fitur ini akan segera tersedia");
+    setIsEditorOpen(true);
   };
 
   const createdDate = new Date(twibbon.created_at).toLocaleDateString("en-US", {
@@ -182,6 +183,14 @@ export default function TwibbonDetail({ twibbon }: TwibbonDetailProps) {
           </div>
         </div>
       )}
+
+      {/* Twibbon Editor Modal */}
+      <TwibbonEditor
+        open={isEditorOpen}
+        onOpenChange={setIsEditorOpen}
+        twibbonUrl={twibbon.publicUrl}
+        twibbonName={twibbon.name}
+      />
     </div>
   );
 }
